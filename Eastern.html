@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DHL Eastern Depot Directory</title>
+    <style>
+        /* 🎨 ดีไซน์สไตล์ Modern Dashboard โทนสีเหลือง-แดง DHL */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f7f9fc;
+            margin: 0;
+            padding: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+        .dashboard-card {
+            background: #ffffff;
+            width: 100%;
+            max-width: 780px;
+            padding: 30px 20px;
+            border-radius: 14px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+            border-top: 6px solid #ffcc00;
+            text-align: center;
+        }
+        .header-box {
+            margin-bottom: 25px;
+            padding-bottom: 18px;
+            border-bottom: 1px solid #f1f3f7;
+        }
+        .title-text {
+            font-size: 24px;
+            font-weight: 900;
+            color: #d00000;
+            letter-spacing: 0.5px;
+            margin: 0 0 6px 0;
+        }
+        
+        /* 🕹️ แผงจัดการกลุ่มปุ่ม */
+        .depot-layout-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            gap: 10px;
+            padding: 4px;
+        }
+        .depot-item-link {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 46px;
+            background: #ffffff;
+            color: #222222;
+            border: 2px solid #ffcc00;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 700;
+            text-decoration: none;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+            transition: all 0.2s ease-in-out;
+            box-sizing: border-box;
+        }
+        .depot-item-link:hover {
+            background: #ffcc00;
+            color: #d00000;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 12px rgba(255, 204, 0, 0.35);
+        }
+        .status-footer {
+            margin-top: 25px;
+            font-size: 11px;
+            color: #ced4da;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+
+<div class="dashboard-card">
+    
+    <div class="header-box">
+        <h1 class="title-text">DHL EASTERN DEPOT SELECTION</h1>
+    </div>
+
+    <!-- แผงรวมปุ่มคลังสินค้าภาคตะวันออกทั้ง 18 คลัง -->
+    <div class="depot-layout-grid" id="depot-grid-container">
+        <!-- รายชื่อปุ่มจะถูกสร้างอัตโนมัติจากส่วนสคริปต์ควบคุมด้านล่าง -->
+    </div>
+
+    <div class="status-footer">
+        ● Intelligent Tab Router Active (Direct Tab Sync)
+    </div>
+</div>
+
+<script type="text/javascript">
+  (function() {
+    // 🔗 1. [แก้ไขแล้ว] เปลี่ยนเป็นลิงก์หลัก Google Sheets ของคลังภาคตะวันออกเรียบร้อยครับ
+    var SPREADSHEET_BASE = 'https://docs.google.com/spreadsheets/d/1TvTKkV6zs5BJpny7WaWlE37l0DKxG6Andp1hwlDw1M8/edit';
+
+    // 📋 2. รายชื่อคลังสินค้าภาคตะวันออก (18 คลัง) และรหัสแท็บย่อย (gid)
+    var depotConfig = [
+      { name: 'CRI', gid: '986841988' },
+      { name: 'BNB', gid: '1227139090' },
+      { name: 'SCA', gid: '1486312965' },
+      { name: 'PYA', gid: '1157900857' },
+      { name: 'STH', gid: '1089667506' },
+      { name: 'PDG', gid: '1753648555' },
+      { name: 'MTP', gid: '903177964' },
+      { name: 'RYG', gid: '216619914' },
+      { name: 'KNG', gid: '1282793002' },
+      { name: 'CTI', gid: '948265269' },
+      { name: 'CSO', gid: '1570965851' },
+      { name: 'PNK', gid: '524604813' },
+      { name: 'NYK', gid: '1050699902' },
+      { name: 'PRI', gid: '835499185' },
+      { name: 'PSK', gid: '732683716' },
+      { name: 'KAB', gid: '357867599' },
+      { name: 'TRD', gid: '1094266172' },
+      { name: 'SKW', gid: '147485826' }
+    ];
+
+    var container = document.getElementById('depot-grid-container');
+    var htmlContent = '';
+
+    // ระบบสคริปต์ประกอบลิงก์เจาะจงแท็บอัตโนมัติสำหรับภาคตะวันออก
+    for (var i = 0; i < depotConfig.length; i++) {
+      var finalUrl = SPREADSHEET_BASE + '?gid=' + depotConfig[i].gid;
+      htmlContent += '<a class="depot-item-link" href="' + finalUrl + '" target="_blank">' + depotConfig[i].name + '</a>';
+    }
+    
+    container.innerHTML = htmlContent;
+  })();
+</script>
+
+</body>
+</html>
